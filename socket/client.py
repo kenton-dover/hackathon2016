@@ -49,7 +49,7 @@ class Client:
         :returns: TODO
 
         """
-        HOST = ''
+        HOST = '10.1.108.131'
         PORT = 8888
         self.connect(HOST, PORT)
         self.main_loop()
