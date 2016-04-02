@@ -8,7 +8,7 @@ going = True
 clock = pygame.time.Clock()
 x = 30
 y = 30
-
+#seeing if i can commit
 while going == True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
