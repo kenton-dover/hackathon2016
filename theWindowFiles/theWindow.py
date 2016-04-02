@@ -1,8 +1,9 @@
 import pygame
 pygame.init();
 dimensions = ( 640 , 480 )
-color =   ( 0 , 0 , 0 )
+color =   ( 255 , 255 , 255 )
 screen = pygame.display.set_mode(dimensions)
+background_image = pygame.image.load("ground.png").convert()
 going = True
 clock = pygame.time.Clock()
 x = 30
@@ -12,7 +13,8 @@ while going == True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             going = False
-    screen.fill(color)
+    screen.fill(color) # ORDER MATTERS : should go Color, background, then objects
+    screen.blit(background_image, [0, 0])
     pressed = pygame.key.get_pressed()
     if pressed[pygame.K_UP] and (y > 0): y -= 10 # added boundes for rectangle
     if pressed[pygame.K_DOWN]and (y < 480 - 60): y += 10 # bounds = screen height - rectangle height 
