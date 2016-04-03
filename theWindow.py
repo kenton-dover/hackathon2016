@@ -1,48 +1,47 @@
 import pygame
-pygame.init();
-dimensions = ( 640 , 480 )
-color =   ( 0 , 0 , 0 )
-screen = pygame.display.set_mode(dimensions)
-going = True
-clock = pygame.time.Clock()
-x = 30
-y = 30
+import WarriorClass
+import constants
 
+class goesInClientLater:
 
-while going == True:
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            going = False
-    screen.fill(color)
-    pressed = pygame.key.get_pressed()
-    if pressed[pygame.K_w] and (y > 0):# added boundes for rectangle
-        y -= 10
-        theWeapon = pygame.Rect(x+50,y,5,-50)
-        if pressed[pygame.K_SPACE]:
-            pygame.draw.rect(screen, (0, 128, 255), theWeapon)#create rectangle in the window
-    if pressed[pygame.K_s]and (y < 480 - 60):# bounds = screen height - rectangle height 
-        y += 10
-        theWeapon = pygame.Rect(x,y,5,100)
-        if pressed[pygame.K_SPACE]:
-            pygame.draw.rect(screen, (0, 128, 255), theWeapon)#create rectangle in the window
-    if pressed[pygame.K_a] and (x > 0):
-        x -= 10
-        theWeapon = pygame.Rect(x-50,y,100,5)
-        if pressed[pygame.K_SPACE]:
-            pygame.draw.rect(screen, (0, 128, 255), theWeapon)#create rectangle in the window
-        theWeapon = pygame.Rect(x,y+50,100,5)
-    if pressed[pygame.K_d]and (x < 640 - 60):
-        x += 10
-        theWeapon = pygame.Rect(x+20,y,100,5)
-        if pressed[pygame.K_SPACE]:
-            pygame.draw.rect(screen, (0, 128, 255), theWeapon)#create rectangle in the window
-    thePerson = pygame.Rect(x, y, 60, 60)
+        
+    def run(self):
+        dimensions = ( constants.SCREEN_WIDTH , constants.SCREEN_HEIGHT )
+        color =   ( 0 , 0 , 0 )
+        screen = pygame.display.set_mode(dimensions)
+        going = True
+        clock = pygame.time.Clock()
+        x = 30
+        y = 30
+        character = WarriorClass.warriorCharacter()
+        pygame.init();
+        going = True
+        while going == True:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    going = False
+            screen.fill(color)
+            character.draw(screen)
+            pressed = pygame.key.get_pressed()
+            if pressed[pygame.K_w] and (y > 0):# added boundes for rectangle
+                character.y -= 10
+
+            if pressed[pygame.K_s]and (y < 480 - 60):# bounds = screen height - rectangle height 
+                character.y += 10
+                
+            if pressed[pygame.K_a] and (x > 0):
+                character.x -= 10
+                
+            if pressed[pygame.K_d]and (x < 640 - 60):
+                character.x += 10                
     
-    pygame.draw.rect(screen, (0, 128, 255), thePerson)#create rectangle in the window
+            pygame.display.flip()#updates the window to every change that happens
     
-    pygame.display.flip()#updates the window to every change that happens
-    
-    clock.tick(20)
+            clock.tick(20)
 
 
-pygame.quit()
+        pygame.quit()
+    
+if __name__ == "__main__":
+    newGame = goesInClientLater()
+    newGame.run()
