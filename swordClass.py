@@ -11,13 +11,13 @@ class swordAttack:
     swordLeft = pygame.image.load("Sword_Left.png")
     swordRight = pygame.image.load("Sword_Right.png")
     
-    rect = swordDown.get_rect()
+    
     def __init__(self,location,xDirection, yDirection):
         
         self.location = location
         self.xDirection = xDirection
         self.yDirection = yDirection
-
+        self.rect = swordAttack.swordDown.get_rect()
     
 
     
@@ -42,5 +42,7 @@ class swordAttack:
             rect.midright = self.location
         elif self.yDirection == 1 and self.xDirection == 1:
             rect.midleft = self.location
+        self.rect = rect
+        
         
         screen.blit(newPosition, rect)

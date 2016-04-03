@@ -18,6 +18,7 @@ class warriorCharacter:
         self.xDirection = 0
         self.rect = warriorCharacter.downSprite.get_rect()
         self.location = self.rect.center
+        self.sword = swordClass.swordAttack(self.location, self.xDirection, self.yDirection)
 
     
     def draw(self, screen):
@@ -50,5 +51,5 @@ class warriorCharacter:
         
         
         
-        sword = swordClass.swordAttack(self.location, self.xDirection, self.yDirection)
-        sword.draw(screen)
+        self.sword = swordClass.swordAttack(self.location, self.xDirection, self.yDirection)
+        self.sword.draw(screen)

@@ -1,12 +1,18 @@
 import pygame
 import WarriorClass
 import constants
-
+import random
 
 class goesInClientLater:
         
     def run(self):
         pygame.init();
+        enemyX = 0
+        enemyY = 0
+        numberOfEnemies = 10
+        battleField = 0
+        arrayOfEnemies = []
+        arrayIsFull = False
         dimensions = ( constants.SCREEN_WIDTH , constants.SCREEN_HEIGHT )
         screen = pygame.display.set_mode(dimensions)
         background = pygame.image.load("flippyboard.png")
@@ -51,9 +57,40 @@ class goesInClientLater:
             if pressed[pygame.K_SPACE]:
                 character.attack(screen)
                 
-            print(character.rect.centery, character.y)
+            if not(arrayIsFull):
+                for i in range(numberOfEnemies):
+                    enemyX = random.randint(0,constants.SCREEN_WIDTH)
+                    enemyY = random.randint(0,constants.SCREEN_HEIGHT)
+                    theEnemy = pygame.Rect(enemyX,enemyY,50,50)
+                    arrayOfEnemies.append(theEnemy)
+                    pygame.draw.rect(screen,(0,0,0),theEnemy)
+                    if arrayOfEnemies.index(theEnemy) == 9:
+                        arrayIsFull = True     
+            for i in range(numberOfEnemies):
+                tempEnemy = arrayOfEnemies.pop(i)
+                pygame.draw.rect(screen,(0,0,0),tempEnemy)#prints the enemies
+                if not character.sword.rect.colliderect(tempEnemy):
+                    arrayOfEnemies.insert(i, tempEnemy)
+                else:
+                    enemyX = random.randint(0,constants.SCREEN_WIDTH)
+                    enemyY = random.randint(0,constants.SCREEN_HEIGHT)
+                    theEnemy = pygame.Rect(enemyX,enemyY,50,50)
+                    arrayOfEnemies.insert(i, theEnemy)
+                    pygame.draw.rect(screen,(0,0,0),theEnemy)               
             
-            pygame.display.flip()#updates the window to every change that happens
+            for i in range(numberOfEnemies):
+                tempEnemy = arrayOfEnemies.pop(i)
+                direction = random.randint(0, 1000)
+                if direction < 250:
+                    tempEnemy = tempEnemy.move(-10,0)
+                elif direction < 500 and direction > 250:
+                    tempEnemy = tempEnemy.move(0,-10)
+                elif direction < 750 and direction > 500:
+                    tempEnemy = tempEnemy.move(10,0)
+                elif direction < 1000 and direction > 750:
+                    tempEnemy = tempEnemy.move(0,10)
+                arrayOfEnemies.insert(i, tempEnemy)            
+                pygame.display.flip()#updates the window to every change that happens
     
             clock.tick(60)
 
