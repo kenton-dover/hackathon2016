@@ -3,10 +3,10 @@ import WarriorClass
 import constants
 
 class goesInClientLater:
-
         
     def run(self):
         dimensions = ( constants.SCREEN_WIDTH , constants.SCREEN_HEIGHT )
+        background = pygame.image.load("flippyboard.png")
         color =   ( 0 , 0 , 0 )
         screen = pygame.display.set_mode(dimensions)
         going = True
@@ -21,24 +21,25 @@ class goesInClientLater:
                 if event.type == pygame.QUIT:
                     going = False
             screen.fill(color)
+            screen.blit(background, [0, 0])
             character.draw(screen)
             pressed = pygame.key.get_pressed()
-            if pressed[pygame.K_w] and (y > 0):# added boundes for rectangle
-                character.y -= 10
+            if pressed[pygame.K_w] and (character.y > (0 + character.rect.centery)):# added boundes for rectangle
+                character.y -= 3
                 character.yDirection = 1
                 character.xDirection = 0
 
-            elif pressed[pygame.K_s]and (y < 480 - 60):# bounds = screen height - rectangle height 
-                character.y += 10
+            elif pressed[pygame.K_s]and (character.y < (constants.SCREEN_HEIGHT - character.rect.centery)):# bounds = screen height - rectangle height 
+                character.y += 3
                 character.yDirection = 0
                 character.xDirection = 0
                 
-            elif pressed[pygame.K_a] and (x > 0):
-                character.x -= 10
+            elif pressed[pygame.K_a] and (character.x > (0 + character.rect.centerx)):
+                character.x -= 3
                 character.yDirection = 0
                 character.xDirection = 1
-            elif pressed[pygame.K_d]and (x < 640 - 60):
-                character.x += 10
+            elif pressed[pygame.K_d]and (character.x < (constants.SCREEN_WIDTH - character.rect.centerx)):
+                character.x += 3
                 character.yDirection = 1
                 character.xDirection = 1
     

@@ -9,6 +9,13 @@ class warriorCharacter:
     upSprite = pygame.image.load("Knight_Up_Still.png")
     leftSprite = pygame.image.load("Knight_Left_Still.png")
     rightSprite = pygame.image.load("Knight_Right_Still.png")
+    #ignore these-wrong class
+   # swordUp = pygame.image.load("Sword_Up")
+   # swordDown = pygame.image.load("Sword_Down")
+   # swordLeft = pygame.image.load("Sword_Left")
+    #swordRight = pygame.image.load("Sword_Right")
+    
+    rect = downSprite.get_rect()
     def __init__(self):
         self.x = random.randint(0, constants.SCREEN_WIDTH)
         self.y = random.randint(0, constants.SCREEN_HEIGHT)
