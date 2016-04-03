@@ -25,18 +25,18 @@ while going == True:
         theWeapon = pygame.Rect(x+50,y,5,-50)
         if pressed[pygame.K_SPACE]:
             pygame.draw.rect(screen, (0, 128, 255), theWeapon)#create rectangle in the window
-    if pressed[pygame.K_s]and (y < SCREEN_HEIGHT - rectLength):# bounds = screen height - rectangle height 
+    elif pressed[pygame.K_s]and (y < SCREEN_HEIGHT - rectLength):# bounds = screen height - rectangle height 
         y += 10
         theWeapon = pygame.Rect(x,y,5,100)
         if pressed[pygame.K_SPACE]:
             pygame.draw.rect(screen, (0, 128, 255), theWeapon)#create rectangle in the window
-    if pressed[pygame.K_a] and (x > 0):
+    elif pressed[pygame.K_a] and (x > 0):
         x -= 10
         theWeapon = pygame.Rect(x-50,y,100,5)
         if pressed[pygame.K_SPACE]:
             pygame.draw.rect(screen, (0, 128, 255), theWeapon)#create rectangle in the window
         theWeapon = pygame.Rect(x,y+50,100,5)
-    if pressed[pygame.K_d]and (x < SCREEN_WIDTH - rectHeight):
+    elif pressed[pygame.K_d]and (x < SCREEN_WIDTH - rectHeight):
         x += 10
         theWeapon = pygame.Rect(x+20,y,100,5)
         if pressed[pygame.K_SPACE]:
