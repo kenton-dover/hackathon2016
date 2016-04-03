@@ -5,7 +5,7 @@ import math
 import constants
 
 class warriorCharacter:
-    characterSprite = pygame.image.load("knightSpriteSheet.png")
+    characterSprite = pygame.image.load("Knight_Down_Still.png")
     def __init__(self):
         self.x = random.randint(0, constants.SCREEN_WIDTH)
         self.y = random.randint(0, constants.SCREEN_HEIGHT)
