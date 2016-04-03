@@ -26,6 +26,7 @@ class goesInClientLater:
         x = 30
         y = 30
         character = WarriorClass.warriorCharacter()
+        character2 = WarriorClass.warriorCharacter()
         
         going = True
         while going == True:
@@ -35,6 +36,7 @@ class goesInClientLater:
             screen.fill(color)
             screen.blit(background, [0, 0])
             character.draw(screen)
+            character2.draw(screen)
             pressed = pygame.key.get_pressed()
             
             if pressed[pygame.K_w] and (character.y > 0):# added boundes for rectangle
@@ -57,6 +59,28 @@ class goesInClientLater:
                 character.xDirection = 1
             if pressed[pygame.K_SPACE]:
                 character.attack(screen)
+            
+            #player 2
+            if pressed[pygame.K_UP] and (character2.y > 0):# added boundes for rectangle
+                character2.y -= 5
+                character2.yDirection = 1
+                character2.xDirection = 0
+
+            elif pressed[pygame.K_DOWN]and (character2.y < constants.SCREEN_HEIGHT):# bounds = screen height - rectangle height 
+                character2.y += 5
+                character2.yDirection = 0
+                character2.xDirection = 0
+                
+            elif pressed[pygame.K_LEFT] and (character2.x > 0):
+                character2.x -= 5
+                character2.yDirection = 0
+                character2.xDirection = 1
+            elif pressed[pygame.K_RIGHT]and (character2.x < constants.SCREEN_WIDTH):
+                character2.x += 5
+                character2.yDirection = 1
+                character2.xDirection = 1
+            if pressed[pygame.K_BACKSPACE]:
+                character2.attack(screen)
                 
             if not(arrayIsFull):
                 for i in range(numberOfEnemies):
@@ -70,7 +94,7 @@ class goesInClientLater:
             for i in range(numberOfEnemies):
                 tempEnemy = arrayOfEnemies.pop(i)
                 pygame.draw.rect(screen,(random.randint(0, 255),random.randint(0, 255),random.randint(0, 255)),tempEnemy)#prints the enemies
-                if not character.sword.rect.colliderect(tempEnemy):
+                if not (character.sword.rect.colliderect(tempEnemy) or character2.sword.rect.colliderect(tempEnemy)):
                     arrayOfEnemies.insert(i, tempEnemy)
                 else:
                     enemyX = random.randint(0,constants.SCREEN_WIDTH)
@@ -100,7 +124,7 @@ class goesInClientLater:
                 arrayOfEnemies.insert(i, tempEnemy)            
                 pygame.display.flip()#updates the window to every change that happens
     
-            clock.tick(60)
+            clock.tick(140)
 
 
         pygame.quit()
