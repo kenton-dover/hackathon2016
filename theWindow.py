@@ -1,13 +1,17 @@
 import pygame
 import WarriorClass
 import constants
-import swordClass
+
 
 class goesInClientLater:
         
     def run(self):
+        pygame.init();
         dimensions = ( constants.SCREEN_WIDTH , constants.SCREEN_HEIGHT )
+        screen = pygame.display.set_mode(dimensions)
         background = pygame.image.load("flippyboard.png")
+        background = pygame.transform.scale(background,(constants.SCREEN_WIDTH,constants.SCREEN_HEIGHT))
+        background_image = background.convert()
         color =   ( 0 , 0 , 0 )
         screen = pygame.display.set_mode(dimensions)
         going = True
@@ -15,7 +19,7 @@ class goesInClientLater:
         x = 30
         y = 30
         character = WarriorClass.warriorCharacter()
-        pygame.init();
+        
         going = True
         while going == True:
             for event in pygame.event.get():
