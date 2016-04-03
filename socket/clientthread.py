@@ -1,6 +1,11 @@
 #!/usr/bin/python3
 import threading
 
+GRID = []
+for row in range(640):
+    GRID.append([None] * 480)
+GRID_LOCK = threading.Lock()
+
 
 class ClientThread(threading.Thread):
 
@@ -18,6 +23,8 @@ class ClientThread(threading.Thread):
 
         """
         while True:
+            GRID_LOCK.acquire()
+            print(GRID[0][0])
             data = self.client.recv(1024)
             if not data:
                 break
@@ -28,4 +35,6 @@ class ClientThread(threading.Thread):
                   self.addr[0] +
                   ":" +
                   str(self.addr[1]))
+            GRID[0][0] = decoded_data
+            GRID_LOCK.release()
             self.client.send(data)
