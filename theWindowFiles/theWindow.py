@@ -40,7 +40,7 @@ while going == True:
         theWeapon = pygame.Rect(x,y+50,100,5)
     elif pressed[pygame.K_d]and (x < SCREEN_WIDTH - rectHeight):
         x += 10
-        theWeapon = pygame.Rect(x+20,y,100,5)
+        theWeapon = pygame.Rect(x+20,y+rectHeight-5,100,5)
         if pressed[pygame.K_SPACE]:
             pygame.draw.rect(screen, (0, 0, 0), theWeapon)#create rectangle in the window
     thePerson = pygame.Rect(x, y, rectHeight, rectLength)
